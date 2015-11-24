@@ -29,6 +29,7 @@ var Taxapp = function(authID) {
 
 Taxapp.prototype.start = function() {
 	// TODO
+	this.log('start');
 };
 
 Taxapp.prototype.touch = function() {
@@ -39,3 +40,12 @@ Taxapp.prototype.exit = function() {
 	// TODO
 };
 
+Taxapp.prototype.log = function(message) {
+	var d = new Date();
+	console.log(d.getTime() + ": " + this.authID + ": " + message);
+	// TODO
+};
+
+module.exports = {
+	Taxapp: Taxapp
+};
