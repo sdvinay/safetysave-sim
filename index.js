@@ -1,5 +1,6 @@
 var Taxapp = require('./src/taxapp').Taxapp;
 var config = require('./src/config').config;
+var User = require('./src/user');
 
 var app1 = new Taxapp(1234);
 var app2 = new Taxapp(5678);
@@ -20,3 +21,5 @@ console.log(config.get('taxapp:SAFETY_SAVE_INTERVAL'));
 setTimeout(function() { app3.touch();}, 300);
 setTimeout(function() { app3.touch();}, 400);
 setTimeout(function() { app3.touch();}, 500);
+
+User.createUser(8288, 10, 100);
