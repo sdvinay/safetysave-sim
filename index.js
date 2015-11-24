@@ -16,3 +16,7 @@ app3.touch();
 console.log(config.get('taxapp'));
 console.log(config.get('taxapp').SAFETY_SAVE_INTERVAL);
 console.log(config.get('taxapp:SAFETY_SAVE_INTERVAL'));
+
+setTimeout(function() { app3.touch();}, 300);
+setTimeout(function() { app3.touch();}, 400);
+setTimeout(function() { app3.touch();}, 500);

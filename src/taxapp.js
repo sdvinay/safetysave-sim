@@ -23,6 +23,8 @@
 // INACTIVITY_TIMEOUT
 // IDLE_THREAD_INTERVAL
 
+var conf = require('./config').config.get('taxapp');
+
 var Taxapp = function(authID) {
 	this.authID = authID;
 	this.lastSaveTime = 0;
@@ -30,18 +32,18 @@ var Taxapp = function(authID) {
 };
 
 Taxapp.prototype.start = function() {
-	// TODO
 	this.log('start');
+	this.touch();
+	// TODO start the "idle thread" (it's not a thread in node)
 };
 
 Taxapp.prototype.touch = function() {
-	// TODO
+	this.log('touch');
 	var d = new Date();
 	this.lastAccessTime = d.getTime();
-	this.log('touch');
-	//if (this.shouldSafetySave()) {
-//		this.doSafetySave();
-//	}
+	if (this.shouldSafetySave() === true) {
+		this.doSafetySave();
+	}
 };
 
 Taxapp.prototype.exit = function() {
@@ -51,8 +53,20 @@ Taxapp.prototype.exit = function() {
 Taxapp.prototype.log = function(message) {
 	var d = new Date();
 	console.log(d.getTime() + ": " + this.authID + ": " + message);
-	// TODO
 };
+
+Taxapp.prototype.shouldSafetySave = function() {
+	var d = new Date();
+	return ((d.getTime() - this.lastSaveTime) > conf.SAFETY_SAVE_INTERVAL);
+};
+
+Taxapp.prototype.doSafetySave = function() {
+	this.log('doSafetySave');
+	var d = new Date();
+	this.lastSaveTime = d.getTime();
+	// TODO actually call something to save
+};
+
 
 module.exports = {
 	Taxapp: Taxapp
