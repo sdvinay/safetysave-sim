@@ -4,12 +4,14 @@
 
 var Taxapp = require('./taxapp').Taxapp;
 
-var createUser = function(authId, numRequests, avgThinkTime) {
+var createUser = function(authId, avgNumRequests, avgThinkTime) {
 	var app = new Taxapp(authId); 
 	var addNextRequest = function() { 
+		// thinkTime is anywhere from 0 to 2*average
 		var thinkTime = ((2*avgThinkTime)*Math.random());
 		setTimeout(function() { 
-			if ((numRequests * Math.random()) < 1) {
+			// exit with the probability of 1/avgNumRequests
+			if ((avgNumRequests * Math.random()) < 1) {
 				app.exit();
 			} else {
 				app.touch(); 
