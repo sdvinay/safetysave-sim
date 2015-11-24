@@ -25,6 +25,8 @@
 
 var Taxapp = function(authID) {
 	this.authID = authID;
+	this.lastSaveTime = 0;
+	this.lastAccessTime = 0;
 };
 
 Taxapp.prototype.start = function() {
@@ -34,6 +36,12 @@ Taxapp.prototype.start = function() {
 
 Taxapp.prototype.touch = function() {
 	// TODO
+	var d = new Date();
+	this.lastAccessTime = d.getTime();
+	this.log('touch');
+	//if (this.shouldSafetySave()) {
+//		this.doSafetySave();
+//	}
 };
 
 Taxapp.prototype.exit = function() {
