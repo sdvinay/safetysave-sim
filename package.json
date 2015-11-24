@@ -4,8 +4,11 @@
   "description": "Simulation of TTO persistence mechanisms",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive test"
   },
   "author": "Vinay Kumar <sdvinay@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  }
 }
