@@ -47,6 +47,7 @@ Taxapp.prototype.touch = function() {
 };
 
 Taxapp.prototype.exit = function() {
+	this.log('exit');
 	// TODO
 };
 

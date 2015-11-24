@@ -22,4 +22,4 @@ setTimeout(function() { app3.touch();}, 300);
 setTimeout(function() { app3.touch();}, 400);
 setTimeout(function() { app3.touch();}, 500);
 
-User.createUser(8288, 10, 30);
+User.createUser(8288, 80, 30);
