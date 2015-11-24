@@ -12,5 +12,8 @@
   "devDependencies": {
     "jshint": "^2.8.0",
     "mocha": "^2.3.4"
+  },
+  "dependencies": {
+    "nconf": "^0.8.2"
   }
 }

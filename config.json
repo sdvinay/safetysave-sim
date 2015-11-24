@@ -1,0 +1,8 @@
+{
+"taxapp": 
+	{
+		"SAFETY_SAVE_INTERVAL": 150,
+		"INACTIVITY_TIMEOUT": 1200,
+		"IDLE_THREAD_INTERVAL": 120
+	}
+}
