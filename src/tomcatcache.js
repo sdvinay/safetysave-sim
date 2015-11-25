@@ -21,6 +21,8 @@
 //        send saveTask to CFP
 //        delete cache entry
 
+var conf = require('./config').config.get('tomcatcache');
+
 // saveTask has authID, safetySave, timestamp, payload
 var cache = {};
 var putFile = function(saveTask) {
@@ -41,7 +43,20 @@ var putFile = function(saveTask) {
 	}
 };
 
+var crawlCache = function(cache) {
+	var compareTimeStamp = new Date().getTime() - conf["SEND_SAFETY_TO_CFP_INTERVAL"];
+	for (var authID in cache) {
+		var cacheEntry = cache[authID];
+		if (cacheEntry.timeOfLastSave < compareTimeStamp)
+		{
+			//doSave(cacheEntry.saveTask)
+			cache[authID] = null; // TODO this isn't right
+		}
+	}
+};
+
 module.exports = {
 	putFile: putFile,
-	cache:cache
+	cache:cache, // TODO this is exposed for testing for now
+	crawlCache:crawlCache // TODO this is exposed for testing for now
 };
