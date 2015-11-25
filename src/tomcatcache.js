@@ -26,6 +26,7 @@ var cache = {};
 var putFile = function(saveTask) {
 	var authID = saveTask.authID;
 	var bSafetySave = saveTask.safetySave;
+	console.log("save (safety=" + bSafetySave + "): " + authID);
 	cacheEntry = cache[authID];
 	if (cacheEntry === undefined) {
 		cacheEntry = {};

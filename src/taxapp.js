@@ -24,6 +24,7 @@
 // IDLE_THREAD_INTERVAL
 
 var conf = require('./config').config.get('taxapp');
+var Cache = require('./tomcatcache');
 
 var Taxapp = function(authID) {
 	this.authID = authID;
@@ -48,7 +49,7 @@ Taxapp.prototype.touch = function() {
 
 Taxapp.prototype.exit = function() {
 	this.log('exit');
-	// TODO
+	this.doSave(false);
 };
 
 Taxapp.prototype.log = function(message) {
@@ -63,9 +64,16 @@ Taxapp.prototype.shouldSafetySave = function() {
 
 Taxapp.prototype.doSafetySave = function() {
 	this.log('doSafetySave');
-	var d = new Date();
-	this.lastSaveTime = d.getTime();
-	// TODO actually call something to save
+	this.doSave(true);
+};
+
+Taxapp.prototype.doSave = function(bSafetySave) {
+	var saveTask = {};
+	saveTask.authID = this.authID;
+	saveTask.safetySave = bSafetySave;
+	saveTask.timestamp = 0;
+	saveTask.payload = "foo";
+	Cache.putFile(saveTask);
 };
 
 
