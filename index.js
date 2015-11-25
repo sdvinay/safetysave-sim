@@ -23,3 +23,6 @@ setTimeout(function() { app3.touch();}, 400);
 setTimeout(function() { app3.touch();}, 500);
 
 User.createUser(8288, 80, 30);
+
+var authId = 1000;
+setInterval(function() { User.createUser(authId++, 80, 30);}, 100);
