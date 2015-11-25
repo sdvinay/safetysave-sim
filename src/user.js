@@ -6,6 +6,7 @@ var Taxapp = require('./taxapp').Taxapp;
 
 var createUser = function(authId, avgNumRequests, avgThinkTime) {
 	var app = new Taxapp(authId); 
+	app.start();
 	var addNextRequest = function() { 
 		// thinkTime is anywhere from 0 to 2*average
 		var thinkTime = ((2*avgThinkTime)*Math.random());
