@@ -37,7 +37,7 @@ var putFile = function(saveTask) {
 	if (bSafetySave) {
 		cacheEntry.saveTask = saveTask;
 	} else {
-		//doSave(saveTask);
+		doSave(saveTask);
 		cacheEntry.timeOfLastSave = new Date().getTime();
 		cacheEntry.saveTask = null;
 	}
@@ -49,10 +49,16 @@ var crawlCache = function(cache) {
 		var cacheEntry = cache[authID];
 		if (cacheEntry.timeOfLastSave < compareTimeStamp)
 		{
-			//doSave(cacheEntry.saveTask)
+			doSave(cacheEntry.saveTask)
 			cache[authID] = null; // TODO this isn't right
 		}
 	}
+};
+
+var doSave = function(saveTask) {
+	var d = new Date();
+	console.log(d.getTime() + ": Tomcat cache saves to CFP: " + saveTask.authID); 
+
 };
 
 module.exports = {
