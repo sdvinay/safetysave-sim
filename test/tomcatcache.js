@@ -8,4 +8,3 @@ Cache.putFile({authID: 123, safetySave: true, timestamp: 0, payload: "abc"});
 console.log(Cache.cache);
 Cache.crawlCache(Cache.cache);
 console.log(Cache.cache);
-debugger;

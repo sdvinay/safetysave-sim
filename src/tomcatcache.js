@@ -44,7 +44,7 @@ var putFile = function(saveTask) {
 };
 
 var crawlCache = function(cache) {
-	var compareTimeStamp = new Date().getTime() - conf["SEND_SAFETY_TO_CFP_INTERVAL"];
+	var compareTimeStamp = new Date().getTime() - conf.SEND_SAFETY_TO_CFP_INTERVAL;
 	for (var authID in cache) {
 		var cacheEntry = cache[authID];
 		if (cacheEntry.timeOfLastSave < compareTimeStamp)
