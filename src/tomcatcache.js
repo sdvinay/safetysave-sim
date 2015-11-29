@@ -28,6 +28,10 @@ var cache = {};
 var putFile = function(saveTask) {
 	var authID = saveTask.authID;
 	var bSafetySave = saveTask.safetySave;
+
+	if (saveTask.timestamp === undefined) {
+		saveTask.timestamp = (new Date()).getTime();
+	}
 	console.log("save (safety=" + bSafetySave + "): " + authID);
 	cacheEntry = cache[authID];
 	if (cacheEntry === undefined) {
@@ -50,7 +54,7 @@ var crawlCache = function(cache) {
 		if (cacheEntry.timeOfLastSave < compareTimeStamp)
 		{
 			doSave(cacheEntry.saveTask)
-			cache[authID] = null; // TODO this isn't right
+			delete cache.authID; // TODO this isn't right
 		}
 	}
 };
