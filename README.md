@@ -10,13 +10,13 @@ time, and see the impact of config changes (spikes, waves, etc).
 
 These are the components to model
 * Phase 1 (TTO side in detail, CFP as monolothic sink)
-** User
-** Taxapp
-** Tomcat cache (including the cache crawler)
-** Return Logic stub (e.g., don't do anything but count the metrics)
+  * User
+  * Taxapp
+  * Tomcat cache (including the cache crawler)
+  * Return Logic stub (e.g., don't do anything but count the metrics)
 * Phase 2 (CFP side in detail)
-** Return Logic impl
-** SP-Caching
-** Couchbase
-** Couchbase crawler
-** DP
+  * Return Logic impl
+  * SP-Caching
+  * Couchbase
+  * Couchbase crawler
+  * DP
