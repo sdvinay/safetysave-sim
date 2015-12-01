@@ -55,9 +55,9 @@ var crawlCache = function(cache) {
 	var compareTimeStamp = now - conf.SEND_SAFETY_TO_CFP_INTERVAL;
 	for (var authID in cache) {
 		var cacheEntry = cache[authID];
-		if (cacheEntry.timeOfLastSave < compareTimeStamp && cacheEntry.saveTask != null)
+		if (cacheEntry.timeOfLastSave < compareTimeStamp && cacheEntry.saveTask !== null)
 		{
-			doSave(cacheEntry.saveTask)
+			doSave(cacheEntry.saveTask);
 			cacheEntry.timeOfLastSave = now;
 			delete cacheEntry.saveTask; // TODO not sure this is right
 			countSaves++;
