@@ -25,43 +25,50 @@ var conf = require('./config').config.get('tomcatcache');
 
 // saveTask has authID, safetySave, timestamp, payload
 var cache = {};
+
 var putFile = function(saveTask) {
 	var authID = saveTask.authID;
 	var bSafetySave = saveTask.safetySave;
-
+	var now = (new Date()).getTime();
 	if (saveTask.timestamp === undefined) {
-		saveTask.timestamp = (new Date()).getTime();
+		saveTask.timestamp = now;
 	}
-	console.log("save (safety=" + bSafetySave + "): " + authID);
+	console.log(now + ": save (safety=" + bSafetySave + "): " + authID);
 	cacheEntry = cache[authID];
 	if (cacheEntry === undefined) {
 		cacheEntry = {};
+		cacheEntry.timeOfLastSave = 0;
 		cache[authID] = cacheEntry;
 	}
 	if (bSafetySave) {
 		cacheEntry.saveTask = saveTask;
 	} else {
 		doSave(saveTask);
-		cacheEntry.timeOfLastSave = new Date().getTime();
+		cacheEntry.timeOfLastSave = now;
 		cacheEntry.saveTask = null;
 	}
 };
 
 var crawlCache = function(cache) {
-	var compareTimeStamp = new Date().getTime() - conf.SEND_SAFETY_TO_CFP_INTERVAL;
+	var countSaves = 0;
+	var now = new Date().getTime(); 
+	var compareTimeStamp = now - conf.SEND_SAFETY_TO_CFP_INTERVAL;
 	for (var authID in cache) {
 		var cacheEntry = cache[authID];
-		if (cacheEntry.timeOfLastSave < compareTimeStamp)
+		if (cacheEntry.timeOfLastSave < compareTimeStamp && cacheEntry.saveTask != null)
 		{
 			doSave(cacheEntry.saveTask)
-			delete cache.authID; // TODO this isn't right
+			cacheEntry.timeOfLastSave = now;
+			delete cacheEntry.saveTask; // TODO not sure this is right
+			countSaves++;
 		}
 	}
+	console.log(now + ": crawler saved " + countSaves + " files");
 };
 
 var doSave = function(saveTask) {
 	var d = new Date();
-	console.log(d.getTime() + ": Tomcat cache saves to CFP: " + saveTask.authID); 
+	console.log(d.getTime() + ": Tomcat cache saves to CFP: " + saveTask.authID + ", safety=" + saveTask.safetySave); 
 
 };
 

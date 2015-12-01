@@ -1,6 +1,10 @@
 var Taxapp = require('./src/taxapp').Taxapp;
 var config = require('./src/config').config;
 var User = require('./src/user');
+var cache = require('./src/tomcatcache');
+
+var crawl_interval = config.get('tomcatcache').CACHE_CRAWL_INTERVAL;
+setInterval(function() { cache.crawlCache(cache.cache)}, crawl_interval);
 
 var app1 = new Taxapp(1234);
 var app2 = new Taxapp(5678);
